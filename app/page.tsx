@@ -139,12 +139,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* Tiêu đề "Build by TanLe" */}
-        <div className="text-sm text-gray-500">
-          <p>Build by TanLe</p>
-        </div>
-      </div>
-
       {/* Footer copyright */}
       <footer className="w-full p-4 bg-gray-800 text-white text-center">
         <p>&copy; 2025 TanLe. All rights reserved.</p>
