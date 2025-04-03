@@ -77,66 +77,78 @@ export default function Home() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        {account ? (
-          <>
-            <h2 className="text-lg font-bold mb-4">Send TEA</h2>
-            <label className="block mb-2">Amount (TEA)</label>
-            <input
-              type="text"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="w-full p-2 border rounded-md mb-3"
-            />
-            <label className="block mb-2">Recipient Address</label>
-            <input
-              type="text"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              className="w-full p-2 border rounded-md mb-3"
-              disabled={loading}
-            />
-            <button
-              onClick={sendToken}
-              className={`w-full p-2 rounded-md text-white ${
-                loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
-              }`}
-              disabled={loading}
-            >
-              {loading ? "Sending..." : "Send TEA"}
+    <div className="flex flex-col justify-between min-h-screen bg-gray-100">
+      <div className="flex flex-col items-center justify-center flex-grow space-y-6">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-96 mb-6">
+          {account ? (
+            <>
+              <h2 className="text-lg font-bold mb-4">Send TEA</h2>
+              <label className="block mb-2">Amount (TEA)</label>
+              <input
+                type="text"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="w-full p-2 border rounded-md mb-3"
+              />
+              <label className="block mb-2">Recipient Address</label>
+              <input
+                type="text"
+                value={recipient}
+                onChange={(e) => setRecipient(e.target.value)}
+                className="w-full p-2 border rounded-md mb-3"
+                disabled={loading}
+              />
+              <button
+                onClick={sendToken}
+                className={`w-full p-2 rounded-md text-white ${
+                  loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
+                }`}
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Send TEA"}
+              </button>
+
+              {/* Hiển thị giao dịch thành công */}
+              {transactionHash && (
+                <div className="mt-4 p-3 text-green-700 bg-green-100 border border-green-400 rounded-md">
+                  ✅ Transaction Successful!  
+                  <br />
+                  <a
+                    href={`https://sepolia.tea.xyz/tx/${transactionHash}`}
+                    target="_blank"
+                    className="text-blue-500 underline"
+                  >
+                    View Transaction
+                  </a>
+                </div>
+              )}
+
+              {/* Hiển thị lỗi giao dịch */}
+              {errorMsg && (
+                <div className="mt-4 p-3 text-red-700 bg-red-100 border border-red-400 rounded-md">
+                  ❌ Transaction Failed  
+                  <br />
+                  {errorMsg}
+                </div>
+              )}
+            </>
+          ) : (
+            <button onClick={connectWallet} className="w-full p-3 bg-green-500 text-white rounded-md">
+              Connect Wallet
             </button>
+          )}
+        </div>
 
-            {/* Hiển thị giao dịch thành công */}
-            {transactionHash && (
-              <div className="mt-4 p-3 text-green-700 bg-green-100 border border-green-400 rounded-md">
-                ✅ Transaction Successful!  
-                <br />
-                <a
-                  href={`https://sepolia.tea.xyz/tx/${transactionHash}`}
-                  target="_blank"
-                  className="text-blue-500 underline"
-                >
-                  View Transaction
-                </a>
-              </div>
-            )}
-
-            {/* Hiển thị lỗi giao dịch */}
-            {errorMsg && (
-              <div className="mt-4 p-3 text-red-700 bg-red-100 border border-red-400 rounded-md">
-                ❌ Transaction Failed  
-                <br />
-                {errorMsg}
-              </div>
-            )}
-          </>
-        ) : (
-          <button onClick={connectWallet} className="w-full p-3 bg-green-500 text-white rounded-md">
-            Connect Wallet
-          </button>
-        )}
+        {/* Tiêu đề "Build by TanLe" */}
+        <div className="text-sm text-gray-500">
+          <p>Build by TanLe</p>
+        </div>
       </div>
+
+      {/* Footer copyright */}
+      <footer className="w-full p-4 bg-gray-800 text-white text-center">
+        <p>&copy; 2025 TanLe. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
